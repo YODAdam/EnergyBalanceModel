@@ -1,0 +1,461 @@
+\documentclass[11pt,a4paper]{article}
+
+% ----------------------------
+% Packages
+% ----------------------------
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{xcolor}
+\UseRawInputEncoding
+
+\lstdefinestyle{Rstyle}{
+  language=R,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  breaklines=true,
+  frame=single,
+  captionpos=b
+}
+
+
+\geometry{margin=1in}
+\onehalfspacing
+
+% ----------------------------
+% Title information
+% ----------------------------
+\title{ \textbf{Transient and Equilibrium Behavior of a Energy Balance Model: Experiment work}}
+\author{\textbf{YODA Adaman} }
+\date{}
+
+\begin{document}
+\maketitle
+
+% ----------------------------
+% Abstract
+% ----------------------------
+
+% ----------------------------
+\section{Introduction}
+% ----------------------------
+
+Energy Balance Models (EBMs) are simplified representations of the Earth’s climate system based on the principle of conservation of energy, whereby the balance between incoming solar radiation and outgoing terrestrial (longwave) radiation determines the Earth’s temperature. By relating radiative fluxes to surface temperature through physically motivated parameterizations such as albedo, emissivity, and heat capacity, EBMs provide a conceptual and quantitative framework for understanding climate sensitivity, equilibrium states, and transient climate response. Although they neglect many complex processes resolved by comprehensive climate models, EBMs are particularly valuable for isolating key feedback mechanisms, exploring the role of external forcings, and gaining physical insight into climate change and potential tipping points. In order to better understand the EBM concept, in this report, we will try to come out with a solution to trois differents tasks based of exercices on different variants of EBM models.  The tree tasks are given as follow:
+
+\subsection{Task 1: Energy Balance Models, Version 1 (EBM1)}
+
+Use a programming language of your choice (e.g. Fortran, MATLAB, R or Python) to develop Version 1 of the \textit{Energy Balance Model (EBM1)} by solving the following equation:
+
+\begin{equation}
+S(1-\alpha) = 4\varepsilon\sigma T^4
+\end{equation}
+
+where symbols have their standard meaning and values, as discussed in class.
+
+\begin{enumerate}
+    \item Plot graphs demonstrating the sensitivity of global temperature to each climate forcing (i.e., solar constant, albedo and emissivity), using realistic ranges (0.1 to 0.9).
+    
+    \item Use the graphs to determine the percentage change required in the present value of each forcing to reduce the global temperature to $0^\circ$C.
+    
+    \item Calculate the percentage change in emissivity needed to increase global temperature by $3^\circ$C (global warming) relative to pre-industrial values, and the percentage increase in albedo required to offset this warming.
+    
+    \item Discuss the limitations of using this model for climate change study.
+\end{enumerate}
+
+
+\subsection{Task 2: Energy Balance Models, Version 2 (EBM2)}
+
+Use a programming language of your choice (Fortran, MATLAB, R or Python) to develop Version 2 of the Energy Balance Model (EBM2) by solving the following equation:
+
+\begin{equation}
+C_p \frac{\partial T}{\partial t} = S(1-\alpha) - 4\varepsilon\sigma T^4
+\end{equation}
+
+where symbols have their standard meanings and values, as discussed in class.
+
+\begin{enumerate}
+    \item Plot the solution for four selected initial temperatures (at least one below $0^\circ$C), with the time axis labelled in years. Compare the solution at the end of the time period to the corresponding equilibrium temperature from the Task~1 model.
+    
+    \item How do changes in $C_p$ affect the equilibrium time of the model? Do they influence the equilibrium temperature, both in terms of time and value?
+    
+    \item Add an ice--albedo feedback condition to your model, where $\alpha = 0.62$ if $T < 0^\circ$C. Compare the equilibrium values obtained now with those in part (a).
+    
+    \item How might this help us understand climate change and tipping points?
+    
+    \item Discuss the limitations of using this model for climate change study.
+\end{enumerate}
+
+
+
+\subsection*{Task 3: Energy Balance Models, Version 3 (EBM3)}
+
+Use a programming language of your choice (Fortran, MATLAB, R or Python) to develop Version 3 of the Energy Balance Model (EBM3) by solving the following equation:
+
+\begin{equation}
+C_p \frac{\partial T_{\text{lat}}}{\partial t} = S(1-\alpha) - 4\varepsilon\sigma T_{\text{lat}}^4 - k\left(T_{\text{lat}} - T_{\text{global}}\right)
+\end{equation}
+
+where $T_{\text{lat}}$ is the temperature at different latitudes, $T_{\text{global}}$ is the global mean temperature, and $k$ is the heat transport coefficient.
+
+\begin{enumerate}
+    \item Test the sensitivity of the model to the heat transport coefficient ($k$).
+    
+    \item Which components of the Earth climate system does the heat transport simulated in this model represent?
+    
+    \item Mention the processes used by these components for heat transport.
+    
+    \item Discuss the limitations of using this model for climate change study.
+\end{enumerate}
+
+
+ \section{Methodology}
+
+The methodology adopted in this study is based on the numerical implementation of successive Energy Balance Model (EBM) formulations using a scientific programming language, combined with graphical analysis for interpretation of results. The governing energy balance equations are implemented and solved either analytically (for equilibrium states) or numerically (for time-dependent and spatially resolved models). Model parameters such as albedo, emissivity, heat capacity, and heat transport coefficients are varied within physically realistic ranges to assess model sensitivity. Time integration is performed using explicit numerical schemes with appropriate time steps to ensure stability and convergence. Graphical representations, including time series plots and sensitivity curves, are used to visualize temperature evolution, equilibrium behavior, and parameter dependence. These visual diagnostics support the physical interpretation of model responses and facilitate comparison between different model configurations and climate feedback scenarios.
+
+% ----------------------------
+\section{Results and Discussion}
+% ----------------------------
+
+\subsection{Task 1: Energy Balance Models, Version 1 (EBM1)}
+
+\begin{enumerate}
+    \item Plot graphs demonstrating the sensitivity of global temperature to each climate forcing (i.e., solar constant, albedo and emissivity), using realistic ranges (0.1 to 0.9).
+
+    \textbf{Change of Temperature with albedo}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\linewidth]{question_a_1.png}
+        \caption{Variation of global temperature with albedo.}
+        \label{fig:albedo}
+    \end{figure}
+
+    \textbf{Change of Temperature with emissivity}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\linewidth]{question_a_2.png}
+        \caption{Variation of global temperature with emissivity.}
+        \label{fig:emissivity}
+    \end{figure}
+
+    \textbf{According to \ref{fig:albedo} and \ref{fig:emissivity}, with have a decreasing of temperature as albedo increase and we have a decreasing of temperature as emissivity also increase.} We can also see that the rate of temperature variation (decrease) is note the same depending on albedo or emissivity.
+
+    \item  Use the graphs to determine the percentage change required in the present value of each forcing to reduce the global temperature to $0^\circ$C.
+
+    \textbf{Present values: albedo ($\alpha$) $= 0.3$ and emissivity ($\epsilon$) $= 0.61$}
+
+    \textbf{A- Percentage of change in \textcolor{orange}{albedo} to get to 0 degree celcuis}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\linewidth]{question_b_1.png}
+        \caption{Variation need in albedo to get the global mean temperature to 0 degree celcuis.}
+        \label{fig:albedo_percent}
+    \end{figure}
+
+
+
+    \textbf{B- Percentage of change in \textcolor{orange}{emissivity} to get to 0 degree celcuis}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\linewidth]{question_b_2.png}
+        \caption{Variation need in emissivity to get the global mean temperature to 0 degree celcuis.}
+        \label{fig:emissivity_percent}
+    \end{figure}
+
+    \textbf{Summary table on percentage of change of \textcolor{orange}{albedo} and \textcolor{orange}{emissivity}}
+
+        \begin{table}[htbp]
+            \centering
+            \begin{tabular}{|l|c|c|c|c|}
+                \hline
+             & \textbf{PRS} & \textbf{FCC} & \textbf{FGE} & \textbf{(Percentage Change)} \\
+            \hline
+            \textbf{Albedo} & 0.3 & 0.3 & \textbf{0.44} & 47\% \\
+            \hline
+            \textbf{Emissivity} & 0.61 & \textbf{0.76} & 0.61 & 25\% \\
+            \hline
+            \textbf{Temperature (°C)} & 15 & 0 & 0 & \\
+            \hline
+            \end{tabular}
+            \caption{This table gives the change need in percentage of the albedo parameter to get to a future climate change scenario (FCC) of 0 degree compared to the Present (PRS).}
+        \end{table}
+    
+    \item Calculate the percentage change in emissivity needed to increase global temperature by $3^\circ$C (global warming) relative to pre-industrial values, and the percentage increase in albedo required to offset this warming.
+
+    \textbf{Present values: albedo ($\alpha$) $= 0.3$ and emissivity ($\epsilon$) $= 0.61$}
+
+    \textbf{A- Percentage of change in \textcolor{orange}{albedo} to get to 18 degree celcuis}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\linewidth]{question_c_1.png}
+        \caption{Variation need in albedo to get the global mean temperature to 18 degree celcuis.}
+        \label{fig:albedo_percent2}
+    \end{figure}
+
+
+
+    \textbf{B- Percentage of change in \textcolor{orange}{emissivity} to get to 18 degree celcuis}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\linewidth]{question_c_2.png}
+        \caption{Variation need in emissivity to get the global mean temperature to 0 degree celcuis.}
+        \label{fig:emissivity_percent2}
+    \end{figure}
+
+    \textbf{Summary table on percentage of change of \textcolor{orange}{albedo} and \textcolor{orange}{emissivity}}
+
+    \begin{table}[htbp]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & \textbf{PRS} & \textbf{FCC} & \textbf{FGE} & \textbf{(Percentage Change)} \\
+\hline
+\textbf{Albedo} & 0.3 & 0.3 & \textbf{0.27} & \textbf{10\%} \\
+\hline
+\textbf{Emissivity} & 0.61 & \textbf{0.58} & 0.61 & \textbf{5\%} \\
+\hline
+\textbf{Temperature (°C)} & 15 & 18 & 18 & \\
+\hline
+\end{tabular}
+\caption{Comparison of PRS, FCC, and FGE parameters}
+\end{table}
+
+    \item Discuss the limitations of using this model for climate change study.
+
+    \begin{enumerate}
+    \item \textbf{Too simple:} Treat the Earth as a single point or simple latitudinal bands, ignoring real-world geography and circulation.
+    
+    \item \textbf{Poor spatial resolution:} Energy Balance Models have poor spatial resolution, making them unsuitable for regional or local climate analysis.
+    
+    \item \textbf{No extreme weather simulation:} Energy Balance Models cannot simulate extreme weather events.
+    
+    \item \textbf{Oversimplified functions:} Energy Balance Models make use of simple functions of temperature, failing to capture the processes of other interactions.
+    
+    \item \textbf{No weather or regional details:} Cannot predict storms, rainfall patterns, or regional climate impacts—only gives global averages.
+    
+    \item \textbf{Poor handling of key processes:} Represent complex feedbacks (like clouds, ocean currents, ice sheets) with oversimplified formulas, a major source of error.
+    
+    \item \textbf{Focus on equilibrium, not timing:} Designed to show the final temperature after a long time, not the actual rate of warming over the coming decades.
+\end{enumerate}
+ 
+    
+\end{enumerate}
+
+
+
+
+
+
+%%%%% TASK 2
+
+\newpage
+
+\subsection{Task 2: Energy Balance Models, Version 2 (EBM2)}
+
+
+\begin{enumerate}
+
+    \item Plot the solution for four selected initial temperatures (at least one below $0^\circ$C), with the time axis labelled in years. Compare the solution at the end of the time period to the corresponding equilibrium temperature from the Task~1 model.
+
+    Figure~\ref{fig:question_1} shows temperature trajectories initialized from four different starting conditions. All simulations converge toward the same equilibrium temperature of approximately 288~K (15$^\circ$C). This equilibrium is consistent with the analytical solution of the equation as follow:
+%
+    \begin{equation}
+    T_{\text{eq}} =
+    \left(
+    \frac{S(1 - \alpha)}{4 \varepsilon \sigma}
+    \right)^{1/4}.
+    \end{equation}
+    
+    Colder initial states require longer adjustment times due to larger initial radiative imbalances. After 500 years, deviations from equilibrium are negligible ($<0.1$~K), demonstrating the stability of the radiative equilibrium and illustrating the concept of climate relaxation time.
+    
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\linewidth]{Question_1.png}
+        \caption{Temporal evolution of global mean surface temperature for four different initial conditions. All trajectories converge toward the same radiative equilibrium temperature.}
+        \label{fig:question_1}
+    \end{figure}
+
+    \item How do changes in $C_p$ affect the equilibrium time of the model? Do they influence the equilibrium temperature, both in terms of time and value?
+
+    Figure~\ref{fig:question_2} illustrates the effect of a fivefold increase in heat capacity. While the equilibrium temperature remains unchanged, the rate of convergence toward equilibrium is significantly reduced. This confirms that equilibrium climate sensitivity depends solely on radiative parameters, whereas heat capacity controls the transient climate response.
+
+    This behavior mirrors the role of Earth’s oceans, whose large heat capacity delays atmospheric warming and leads to lagged climate responses.
+    
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\linewidth]{Question_2.png}
+        \caption{Effect of increased heat capacity on the transient temperature response. A larger heat capacity slows the approach to equilibrium without modifying the equilibrium temperature.}
+        \label{fig:question_2}
+    \end{figure}
+    
+    \item Add an ice--albedo feedback condition to your model, where $\alpha = 0.62$ if $T < 0^\circ$C. Compare the equilibrium values obtained now with those in part (a).
+
+    Introducing a discontinuous albedo parameterization produces two stable equilibria (Figure~\ref{fig:question_3}):
+    \begin{itemize}
+      \item a cold equilibrium near 265~K for initial $T < 273.15$~K;
+      \item a warm equilibrium near 288~K for initial $T > 273.15$~K.
+    \end{itemize}
+    
+    The system thus exhibits bistability and hysteresis. Crossing the freezing threshold triggers abrupt transitions between climate states, representing a classical climate tipping point \citep{Budyko1969}.
+    
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\linewidth]{Question_3.png}
+        \caption{Temperature trajectories under a temperature-dependent albedo, illustrating bistability and multiple equilibrium states induced by ice--albedo feedback.}
+        \label{fig:question_3}
+    \end{figure}
+
+    \item How might this help us understand climate change and tipping points?
+
+    Ice--albedo feedback is a canonical example of a positive feedback that can amplify climate change. In the contemporary climate system, this mechanism contributes to Arctic amplification through sea-ice loss. The existence of multiple equilibria suggests that relatively small perturbations may induce large and potentially irreversible climate shifts.
+
+    \item Discuss the limitations of using this model for climate change study.
+
+    Despite its pedagogical value, the EBM has several limitations:
+    \begin{enumerate}
+      \item absence of spatial and seasonal variability;
+      \item simplified radiative transfer and constant emissivity;
+      \item static and highly idealized albedo representation;
+      \item lack of carbon cycle and greenhouse gas feedbacks;
+      \item omission of nonlinear atmospheric and oceanic processes;
+      \item inability to represent millennial-scale ocean heat uptake.
+    \end{enumerate}
+
+    Consequently, EBMs are best suited for conceptual understanding rather than quantitative climate projections.
+    
+\end{enumerate}
+
+
+
+\subsection*{Task 3: Energy Balance Models, Version 3 (EBM3)}
+
+\begin{enumerate}
+    \item Test the sensitivity of the model to the heat transport coefficient ($k$).
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\linewidth]{question_3a_1.png}
+        \caption{Sensitivity of the model to the heat transport coeficient}
+        \label{fig:sensitivityto_k}
+    \end{figure}
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\linewidth]{question_3a_b.png}
+        \caption{Variation of global temperature over time (Tg)}
+        \label{fig:sensitivityto_k}
+    \end{figure}
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\linewidth]{question_3a_3.png}
+        \caption{Variation of temperature over latitudes}
+        \label{fig:sensitivityto_k}
+    \end{figure}
+
+    
+    \item Which components of the Earth climate system does the heat transport simulated in this model represent?
+
+    \textbf{The heat transport simulated in this model represent the geosphere}
+    
+    \item Mention the processes used by these components for heat transport.
+
+    \textbf{The process used for this heat transport is atmospheric circulations}
+    
+    \item Discuss the limitations of using this model for climate change study.
+\end{enumerate}
+
+
+% ----------------------------
+\section{Conclusions}
+% ----------------------------
+
+Using a zero-dimensional Energy Balance Model, this study demonstrates that:
+\begin{itemize}
+  \item radiative equilibrium is independent of initial conditions and heat capacity;
+  \item heat capacity governs the transient adjustment timescale;
+  \item ice--albedo feedback introduces multiple equilibria and tipping-point behavior;
+  \item simplified models provide conceptual insight but lack predictive realism.
+\end{itemize}
+
+Future work could extend this framework to include latitudinal structure, dynamic emissivity, and coupling with biogeochemical cycles.
+
+% ----------------------------
+\section*{Acknowledgments}
+% ----------------------------
+
+This research was conducted using open-source tools in \texttt{R}. The author acknowledges foundational contributions from classical climate modeling literature.
+
+% ----------------------------
+\section*{Data Availability}
+% ----------------------------
+
+
+% ----------------------------
+% References
+% ----------------------------
+\appendix
+\section{R Implementation of the Energy Balance Model}
+
+\lstset{style=Rstyle}
+
+\begin{lstlisting}[caption={R code for the zero-dimensional Energy Balance Model with ice--albedo feedback}]
+# Model parameters
+dt <- 1e8
+cp <- 1e10
+S <- 1372
+alpha <- 0.3
+eps <- 0.61
+sigma <- 5.67e-8
+
+# Time and temperature vectors
+timeVect <- 1:500
+TnVector <- numeric(length = 500)
+
+# Initial temperature (K)
+Tn <- 273
+
+# Time integration loop
+for (i in 1:500) {
+
+  # Ice--albedo feedback
+  if (Tn < 273) {
+    alpha <- 0.62
+  } else {
+    alpha <- 0.30
+  }
+
+  Ein <- S * (1 - alpha)
+  Eout <- 4 * eps * sigma * (Tn^4)
+
+  Tend <- (dt / cp) * (Ein - Eout)
+  Tn <- Tn + Tend
+
+  TnVector[i] <- Tn
+}
+
+# Plot results
+plot(
+  x = timeVect,
+  y = TnVector - 273.15,
+  type = "l",
+  ylim = c(-50, 40),
+  xlab = "Time step",
+  ylab = "Temperature (°C)",
+  main = "Ice--albedo feedback"
+)
+\end{lstlisting}
+
+\bibliographystyle{apalike}
+\bibliography{references}
+
+\end{document}
